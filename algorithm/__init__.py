@@ -1,1 +1,3 @@
 from algorithm.FirstAlgorithm import FirstAlgorithm
+from algorithm.PhysicalCoverageAlgorithm import PhysicalCoverageAlgorithm
+from algorithm.SequenceCoverageAlgorithm import SequenceCoverageAlgorithm

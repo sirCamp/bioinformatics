@@ -18,8 +18,9 @@ def main_menu():
 
     print "Welcome,\n"
     print "Please choose the menu you want to start:"
-    print "[1] Menu 1"
-    print "[2] Menu 2"
+    print "[1] Genome insert length"
+    print "[2] Sequence coverage"
+    print "[3] Physical coverage"
     print "\n"
     print "[0]. Quit"
     choice = raw_input(">>  ")
@@ -62,7 +63,8 @@ def exit():
 menu_actions = {
     'main_menu': main_menu,
     '1': "FirstAlgorithm",
-    '2': "SecondAlgorithm",
+    '2': "SequenceCoverageAlgorithm",
+    '3': "PhysicalCoverageAlgorithm",
     '0': exit,
 }
 
