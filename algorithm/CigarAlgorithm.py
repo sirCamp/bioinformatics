@@ -4,7 +4,7 @@ import string
 import os
 import errno
 
-class SequenceCoverageAlgorithm(BaseAlgorithm):
+class CigarAlgorithm(BaseAlgorithm):
 
 
 
@@ -27,21 +27,32 @@ class SequenceCoverageAlgorithm(BaseAlgorithm):
 
                 pieces = line.split("\t")
 
-                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0):
-                   index = 0
 
-                   for x in xrange(0,len(str(pieces[9]))):
-                       genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
-                       index +=1
-                else:
-                    index = 0
-                    if int(pieces[8]) < 0:
-                      for x in xrange(0,len(str(pieces[9]))):
-                        genome_change[int(pieces[3])-index] = genome_change[int(pieces[3])-index] + 1
+                if pieces[5].find("H") == -1 and pieces[5].find("S") == -1:
+                    continue;
+                #else:
+                #    print pieces[5]
+
+                index = 0
+                for x in xrange(0,len(str(pieces[9]))):
+                        genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
                         index +=1
+
+
+                #if (int(pieces[8]) > 0):
+                 #   index = 0
+
+                #    for x in xrange(0,len(str(pieces[9]))):
+                #        genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
+                #        index +=1
+                #else:
+                #    index = 0
+                #    if int(pieces[8]) < 0:
+                #       for x in xrange(0,len(str(pieces[9]))):
+                #        genome_change[int(pieces[3])-index] = genome_change[int(pieces[3])-index] + 1
+                #        index +=1
                     #genome_change[int(pieces[7]) ] = (genome_change[int(pieces[7])]) -1
                 #genome_change[int(pieces[3])] = genome_change[int(pieces[3])] + 1
-
 
         file = "";
         file += "fixedStep chrom=genome start=1 step=1 span=1\n"
@@ -50,10 +61,11 @@ class SequenceCoverageAlgorithm(BaseAlgorithm):
 
         for i in genome_change:
             coverage = genome_change[i];
-            file += str(coverage)+"\n"
+            print i
+            file += str(i)+"\n"
 
         print "Saving sequence_coverage.wig file..."
-        targetF = open("sequence_coverage.wig","w")
+        targetF = open("cigar.wig","w")
         targetF.truncate()
         targetF.write(file)
         targetF.close()

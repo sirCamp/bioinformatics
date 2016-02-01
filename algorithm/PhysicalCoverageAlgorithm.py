@@ -40,6 +40,7 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
         genome_change = []
         range = []
         if self.lenght == 0:
+            #TODO fare il parse
             range  = xrange(0, 3079196)
         else:
             range = xrange(0, self.lenght)

@@ -13,52 +13,104 @@ class FirstAlgorithm(BaseAlgorithm):
         data = []
         sum = 0;
         lineNumber = 0;
+
+
+        self.lengthOfCoverage()
+        genome_insertion = {}
+
+        ext = 0;
         with open(self.path) as file:
             for line in file:
-                #genome_lenght += 1
-                #if genome_lenght == 10000:
-                   #break
+
+                if ext == self.length:break;
 
                 if line.find("@") != -1:
-                    continue;
+                    continue
 
                 pieces = line.split("\t")
+                ext += 1
+                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0) and int(pieces[8]) <10001:
 
-                seven = 0;
-                three = 0;
-                five = ""
-                four = ""
-                for index, item in enumerate(pieces, start=0):   # default is zero
-                    if index == 7:
-                        seven = int(item)
-
-                    if index == 3:
-                        three = int(item)
-                    if index == 4:
-                        four = str(item)
-
-                temp = abs(three - seven);
-                if temp > 10000:
-                    print four
-                    continue
-                lineNumber += 1
-                sum +=temp
-                #print str(sum) +" "+str(temp)
-                data.append(temp)
-
-        med = sum/lineNumber
-
-        sum = 0
-        lineNumber = 0
-        for index, item in enumerate(data, start=0):
-            lineNumber = index
-            sum += pow((med-item),2);
+                    index = 0;
+                    while index < len(pieces[9]):
 
 
-        print "media: "+str(med)
-        print "varianza: "+str(sum/lineNumber)
-        print "variazione standard: "+str(math.sqrt(sum/lineNumber))
+                        key = index + int(pieces[3])
+                        index += 1 ;
 
+                        if genome_insertion.has_key(key):
+                            #media non standard, e comunque valida e permette di ottimizzare
+                            genome_insertion[key] = int(((genome_insertion[key] + int(pieces[8]))/2))
+                        else:
+                            genome_insertion.__setitem__(key,int(pieces[8]))
+
+
+        file = "fixedStep chrom=genome start=1 step=1 span=1\n"
+        for i in genome_insertion:
+            file += str(genome_insertion[i])+"\n"
+
+        print "Saving genome_insertion_lenght.wig file..."
+        targetF = open("genome_insertion_lenght.wig","w")
+        targetF.truncate()
+        targetF.write(file)
+        targetF.close()
+        print("Done!")
+
+
+
+
+                #genome_lenght += 1
+                #if genome_lenght == 100000:
+                   #break
+                #   f = open("text.wig", 'w')
+                #   f.write(final)
+                 #  f.close()
+                 #  exit(0)
+
+                #if line.find("@") != -1:
+                #    continue;
+
+                #pieces = line.split("\t")
+
+                #seven = 0;
+                #three = 0;
+                #five = ""
+                #four = ""
+                #if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0):
+                #    for index, item in enumerate(pieces, start=0):   # default is zero
+                #        if index == 7:
+                #            seven = int(item)
+
+                #        if index == 3:
+                #            three = int(item)
+                        #if index == 4:
+                        #    four = str(item)
+
+                #    temp = abs(three - seven);
+                    #if temp > 10000:
+                    #    print four
+                    #    continue
+                #    lineNumber += 1
+                #    sum +=temp
+                    #print(temp)
+                #    final += str(temp)+"\n"
+                    #print str(sum) +" "+str(temp)
+                #    data.append(temp)
+
+        #med = sum/lineNumber
+
+        #sum = 0
+        #lineNumber = 0
+        #for index, item in enumerate(data, start=0):
+        #    lineNumber = index
+        #    sum += pow((med-item),2);
+
+
+        #print "media: "+str(med)
+       # print "varianza: "+str(sum/lineNumber)
+       # print "variazione standard: "+str(math.sqrt(sum/lineNumber))
+       # f = open("text.wig", 'w')
+       #  f.write(final)
         #N = len(data)
        # menMeans = data#(20, 35, 30, 35, 27)
        # menStd = (2, 3, 4, 1, 2)
