@@ -1,3 +1,6 @@
 from algorithm.FirstAlgorithm import FirstAlgorithm
 from algorithm.PhysicalCoverageAlgorithm import PhysicalCoverageAlgorithm
 from algorithm.SequenceCoverageAlgorithm import SequenceCoverageAlgorithm
+from algorithm.CigarAlgorithm import CigarAlgorithm
+from algorithm.KmersAlgorithm import KmersAlgorithm
+from algorithm.InsertionAverageAlghorithm import InsertionAverageAlgorithm

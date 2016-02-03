@@ -39,8 +39,7 @@ class SequenceCoverageAlgorithm(BaseAlgorithm):
                       for x in xrange(0,len(str(pieces[9]))):
                         genome_change[int(pieces[3])-index] = genome_change[int(pieces[3])-index] + 1
                         index +=1
-                    #genome_change[int(pieces[7]) ] = (genome_change[int(pieces[7])]) -1
-                #genome_change[int(pieces[3])] = genome_change[int(pieces[3])] + 1
+
 
 
         file = "";

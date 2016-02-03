@@ -39,20 +39,6 @@ class CigarAlgorithm(BaseAlgorithm):
                         index +=1
 
 
-                #if (int(pieces[8]) > 0):
-                 #   index = 0
-
-                #    for x in xrange(0,len(str(pieces[9]))):
-                #        genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
-                #        index +=1
-                #else:
-                #    index = 0
-                #    if int(pieces[8]) < 0:
-                #       for x in xrange(0,len(str(pieces[9]))):
-                #        genome_change[int(pieces[3])-index] = genome_change[int(pieces[3])-index] + 1
-                #        index +=1
-                    #genome_change[int(pieces[7]) ] = (genome_change[int(pieces[7])]) -1
-                #genome_change[int(pieces[3])] = genome_change[int(pieces[3])] + 1
 
         file = "";
         file += "fixedStep chrom=genome start=1 step=1 span=1\n"

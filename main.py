@@ -18,11 +18,12 @@ def main_menu():
 
     print "Welcome,\n"
     print "Please choose the menu you want to start:"
-    print "[1] Genome insert length"
+    print "[1] Genome insert length with STD and mean"
     print "[2] Sequence coverage"
     print "[3] Physical coverage"
     print "[4] Cigar H & S"
     print "[5] Kmers counter"
+    print "[6] Insertion Average"
     print "\n"
     print "[0]. Quit"
     choice = raw_input(">>  ")
@@ -69,6 +70,7 @@ menu_actions = {
     '3': "PhysicalCoverageAlgorithm",
     '4': "CigarAlgorithm",
     '5': "KmersAlgorithm",
+    '6': "InsertionAverageAlgorithm",
     '0': exit,
 }
 

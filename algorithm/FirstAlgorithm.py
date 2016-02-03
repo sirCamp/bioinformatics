@@ -9,14 +9,10 @@ class FirstAlgorithm(BaseAlgorithm):
         BaseAlgorithm.__init__(self, name, path)
 
     def run(self):
-        genome_lenght  = 0
-        data = []
-        sum = 0;
-        lineNumber = 0;
-
-
         self.lengthOfCoverage()
-        genome_insertion = {}
+        genome_insertion = []
+        sum = 0;
+        sumI = 0;
 
         ext = 0;
         with open(self.path) as file:
@@ -29,31 +25,29 @@ class FirstAlgorithm(BaseAlgorithm):
 
                 pieces = line.split("\t")
                 ext += 1
-                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0) and int(pieces[8]) <10001:
-
-                    index = 0;
-                    while index < len(pieces[9]):
-
-
-                        key = index + int(pieces[3])
-                        index += 1 ;
-
-                        if genome_insertion.has_key(key):
-                            #media non standard, e comunque valida e permette di ottimizzare
-                            genome_insertion[key] = int(((genome_insertion[key] + int(pieces[8]))/2))
-                        else:
-                            genome_insertion.__setitem__(key,int(pieces[8]))
+                if int(pieces[8]) > 0:
+                    isize = abs(int(pieces[3])-int(pieces[7]))
+                    genome_insertion.append(isize)
+                    sum += isize
+                    sumI += 1
 
 
-        file = "fixedStep chrom=genome start=1 step=1 span=1\n"
+        file = ""
+
+        isizeM = int((sum / sumI))
+        isizeSTD = 0
+        tmp = 0;
         for i in genome_insertion:
-            file += str(genome_insertion[i])+"\n"
+            file += str(i)+"\n"
+            tmp += math.pow((i-isizeM),2) #per la dev standard
 
-        print "Saving genome_insertion_lenght.wig file..."
-        targetF = open("genome_insertion_lenght.wig","w")
+        print "Saving genome_insert_csv.csv file..."
+        targetF = open("genome_insert_csv.csv","w")
         targetF.truncate()
         targetF.write(file)
         targetF.close()
+        print "Media: "+str(isizeM)
+        print "Standard Dev: "+(tmp/sumI)
         print("Done!")
 
 
