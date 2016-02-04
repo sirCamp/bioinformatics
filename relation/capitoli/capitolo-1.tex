@@ -1,0 +1,87 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../tesi.tex
+% !TEX spellcheck = it-IT
+
+%**************************************************************
+\chapter{Resequencing}
+\label{cap:resequencing}
+%**************************************************************
+
+For the project development a bacterial genome was provided\\
+
+This genome belongs to \emph{Lactobacillus casei} and it is quite long genome, 3.079.196 long bases.
+
+The goal of the project is sequence a similar bacterium, defined as sample (or test), using the mate pairs taht derived from it, to find and highlight any structural variation as inversions, deletions or insertions. In particular, the tracks are to be produced displayable on Integrative Genome Browser (IGV).
+The project includes a part of data analysis to understand the nature and a programming part for the production of results.
+
+%**************************************************************
+\section{Instruments}
+
+I used these instruments:
+\begin{itemize}
+\item IGV that allows the displayment of traks on reference genome.
+\item BWA for the alignment of the mate pairs on reference genome.
+\item R for the traks plotting
+\end{itemize}
+
+For the code devlopment Python 3 was used.
+
+%**************************************************************
+\section{Datas}
+
+For development of the project, the given data was:
+
+%\begin{itemize}
+%\item [Lactobacillus_caei_genome.fasta]{ The genome of the bacterium}
+%\item
+%[lact_sp_read1.fastaq]{ the first reads of resequencing}
+%\item
+%[lact_sp_read2.fastaq]{ the second reads of resequencing}
+%\end{itemize} 
+
+\begin{risk}{Documentazione L7-filter insufficiente}
+    \riskdescription{La documentazione per la realizzazione del modulo del kernel che permette il riconoscimento del livello applicativo risulta essere decisamente insufficiente e non aggiornata}
+    \risksolution{Utilizzo di libri di testo come: ``\textit{Designing and Implementing Linux firewalls and QoS using NetFilter, iproute2, NAT, and
+L7-filter}'' il testo non risulta essere aggiornato ma le spiegazioni sono ottimali}
+    \label{risk:documentation}
+    \end{risk}
+
+These last two files contains the reads, the quality of each base of the reads and others useful information that allows the SAM file creation.
+
+From the SAM file i extracted and used different data as:
+\begin{itemize}
+\item I
+\end{itemize}
+
+we are given the reference genome and two sam file
+containing the alignments of reads that make up the library mate to pair
+available. The two extremes of each mate pair are reported separately in
+two files. The reads are identified by a unique code for each mate pair and a
+flag (/ 1 and / 2) indicating which estremit`a relate.
+The reads in the sam files are shown in plain text and provide additional information according to the SAM standards. In particular will be useful in the following fields
+(Not all are):
+
+%**************************************************************
+\section{Results}
+
+\begin{description}
+    \item[{\hyperref[cap:processi-metodologie]{Il secondo capitolo}}] descrive ...
+    
+    \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:progettazione-codifica]{Il quinto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:verifica-validazione]{Il sesto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:conclusioni]{Nel settimo capitolo}}] descrive ...
+\end{description}
+
+Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
+\begin{itemize}
+	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+	\item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
+	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \emph{corsivo}.
+\end{itemize}

@@ -10,7 +10,7 @@ class BaseAlgorithm(object):
         self.name = name
         self.path = path
         self.length = 0
-        self.debug = False
+        self.debug = True
 
 
     def getName(self):
