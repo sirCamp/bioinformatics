@@ -13,8 +13,7 @@
                a4paper,                 % carta A4
                twoside,                 % impagina per fronte-retro
                openright,               % inizio capitoli a destra
-               english,                 
-               italian,                 
+               english,                                
                ]{book}    
 
 \usepackage[utf8]{inputenc}             % codifica di input; anche [latin1] va bene
@@ -26,7 +25,7 @@
 
 %\usepackage{amsmath,amssymb,amsthm}    % matematica
 
-\usepackage[english, italian]{babel}    % per scrivere in italiano e in inglese;
+\usepackage[english]{babel}    % per scrivere in italiano e in inglese;
                                         % l'ultima lingua (l'italiano) risulta predefinita
 
 \usepackage{bookmark}                   % segnalibri
@@ -68,7 +67,7 @@
 
 \usepackage{subfig}                     % sottofigure, sottotabelle
 
-\usepackage[italian]{varioref}          % riferimenti completi della pagina
+%\usepackage[italian]{varioref}          % riferimenti completi della pagina
 
 \usepackage[dvipsnames]{xcolor}         % colori
 
@@ -101,10 +100,6 @@
 %**************************************************************
 \frontmatter
 \input{inizio-fine/frontespizio}
-%\input{inizio-fine/colophon}
-%\input{inizio-fine/dedica}
-%\input{inizio-fine/sommario}
-%\input{inizio-fine/ringraziamenti}
 \input{inizio-fine/indici}
 \cleardoublepage
 
@@ -115,12 +110,7 @@
 \input{capitoli/capitolo-1}             % Introduzione
 \input{capitoli/capitolo-2}             % Processi
 \input{capitoli/capitolo-3}             % Kick-Off
-\input{capitoli/capitolo-4}             % Concept Preview
-\input{capitoli/capitolo-5}             % Product Prototype
-\input{capitoli/capitolo-6}             % Product Design Freeze e SOP
-\input{capitoli/capitolo-7}             % Conclusioni
-\appendix                               
-\input{capitoli/capitolo-A}             % Appendice A
+\input{capitoli/capitolo-4}             % Concept Preview            
 
 %**************************************************************
 % Materiale finale
