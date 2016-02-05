@@ -13,44 +13,46 @@
 %**************************************************************
 \section{SAM file creation}
 At first time, to procede with the project, I've created the SAM file by using the \emph{Burrows-Wheeler Aligner} supplied by BWA.
+The software could be found here: \href{http://bio-bwa.sourceforge.net}[http://bio-bwa.sourceforge.net]
 
 The first command necessary for the file creation is:
 \\
 \\
-\verb|bwa index ref.fa|
+\verb|bwa index Lactobacillus_casei_genome.fasta|
 \\
 \\
-This command needs to index the fasta genome file, and that allows the performance increase during the genome alignment.\\
+This command serves to index the fasta genome file. The indexing of the genome's file allows the increasing of the performance during the genome alignment phase.\\
 
 The second typed command is:
 \\
 \\
-\verb|bwa mem ref.fa read1.fq read2.fq > aln-pe.sam|
+\verb|bwa mem Lactobacillus_casei_genome.fasta lact_sp.read1.fastq lact_sp.read2.fastq > Lactobacillus_casei_genome.sam|
 \\
 \\
-This command allows the alignment of the two reads file to the genome reference file into a SAM file that needs for the project.\\
+This command allows the alignment of the two reads files on the reference genome file into a SAM file that servers for the project.\\
 
 There are others different instruments that made this, but BWA should be the best tools specially for the performance.\\
 
-The goal file is a file that contains all the informations about the resequenced genome in according with the SAM specifications.
-It weigth about 890MB.
+The goal file contains all the informations about the resequenced genome in according with the SAM specifications.
+It weight of the file is more or less 890MB.
 
 
 \section{Insertion length}
-For this point I wrote an algorithm that for each row of the SAM file that contains informations about the resequencing, I extracted the obtained value from :
+For this point I wrote an algorithm, that for each row of the SAM file, which contains information about the resequencing, extract the value obtained from :
 \\
 \\
 \verb|abs(POS -PNEXT)|
 \\
 \\
-Where \emph{POS} is the start of the read and \emph{PNEXT} is the position of the next read.\\
-For this point there are some different opinion and come sources, suggests to use only the \emph{TLEN} field of the SAM file.
+Where \emph{POS} is the start of the read and \emph{PNEXT} is the start position of the next read.\\
+For research fo the insert size length, there are some different opinion that comes from different sources, some of these suggests to use only the \emph{TLEN} field of the SAM file to calculate the insert size length.
 \\\\
-Once time that I extracted all the insertion length, I plotted all the data in a BatChart trak, as yuou could see here \ref{fig:1}, that allows to identify the wrong lectures and the wrong reads.
+Once time that I extracted all the insertion length, I plotted all the data in a BatChart trak, as yuo could see here \ref{fig:1}.\\
+This trak allows to identify the wrong lectures and the wrong reads.
 \\\\
-For this trak, a R script was made; from this chart is possible to analize the reads that has wrong insert values, which in some case, are over 2 milion bases long.\\
+For this trak, a R script was made; from this chart, as I already wrote, is possible to analize the reads that has wrong insert values, which in some cases, is over 2 milion bases long.\\
 
-This error could be explained by the multiple alignment of the genome that align in really far positions.
+This error could be partially explained by the multiple alignment of the reads on reference genome.
 
  \begin{figure}[H]
 				\centering
@@ -59,11 +61,11 @@ This error could be explained by the multiple alignment of the genome that align
 				\end{figure}
 
 From this trak, is possibile to see how some read that has the insert lenght longer then 10.000 bases has an error, so for the mean and the standard deviation, this read was be exluded.
-As you can see here \ref{fig:2} exludig read with insert longher then 10.000 bases the obtained chart is more right
+Here \ref{fig:2} you could see the trak that exlude the reads with insert equal to or greather then 10.000 bases long. The obtained chart is more right then first chart.
  \begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.8]{immagini/r1.png}
-				\caption{Barchart for the isize with exluding errors}\label{fig:2}
+				\caption{Barchart for the isize without errors}\label{fig:2}
 				\end{figure}
 
 The result of mean and standard deviation are:
@@ -84,21 +86,21 @@ The result of this point, also, is a csv file that allows to create a barchart w
 
 \section{Physical Coverage}
 
-The Physical Coverage is calulated by an algorithm really similer to the given perl script.\\
+The Physical Coverage is calulated by an algorithm really similar to the given Perl script.\\
 
-The mainly reason was be the optimization of the algorithm.\\\\
+The mainly reason is the optimization of the algorithm.\\\\
 
-The algorithm, infact, loops on half of reads by checking in the \emph{TLEN} is greather then 0.\\
+The algorithm, infact, loops on half of reads by checking if the \emph{TLEN} is greather then 0.\\
 At first time, I had created an array where each cell was be intialized to 0. 
-In each one of these cells, I can put +1 when the index is equal to the read start position, and I can put -1 when the index is equal to the next read start position.\\
+In each one of these cells, I putted +1 when the index is equal to the read start position, and I putted -1 when the index is equal to the next read start position.\\
 
-Is necessary mentioning who the use read is only the right aligned read, and this filter is made by checking the \emph{FLAG} field of the SAM file.
+Is necessary mentioning which the used reads, are only the right aligned reads, and the filtering of the right-wrong reads is made by checking the \emph{FLAG} field of the SAM file.
 \\
-The resultant values were putted inside a wig file, called \emph{physical\_coverage.wig}.
+The resultant values are putted inside a wig file, called \emph{physical\_coverage.wig}.
 
-After that the file was loaded onto IGV to show the physical coverage fort starting to make hypotesys and analisys about some structural variations.
+After that, the file was loaded onto IGV to show the physical coverage for starting to make hypotesys and analisys about some structural variations.
 
-Some small part of resultant trak produced by the IGV are reported below:
+Some small part of resultant traks produced by the IGV are reported below:
 
  \begin{figure}[H]
 				\centering
@@ -110,7 +112,7 @@ Some small part of resultant trak produced by the IGV are reported below:
  \begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.6]{immagini/physical_coverage_2.png}
-				\caption{sequence coverage, in the same position the physiscal coerage identify an inversion structural modification}\label{fig:7}
+				\caption{sequence coverage, in the same position the physiscal coverage identify an inversion structural modification}\label{fig:7}
 				\end{figure}
 				
 				
@@ -123,8 +125,9 @@ Some small part of resultant trak produced by the IGV are reported below:
 
 
 \section{Sequence Coverage}
-The Sequence Coverage is calulated by an algorithm containes inside the SequenceCoverageAlgorithm.py similar to the physical coverage script's but with the differences who is necessary the read that has positive and negative \emph{TLEN}.\\
-As well as Physical coverage, also, this algorithm make a check on the \emph{FLAG} fiedl
+The Sequence Coverage is calulated by the algorithm contained inside the SequenceCoverageAlgorithm.py.\\
+This algorithm is similar to the physical coverage script's but with the differences who is necessary the read that has positive and negative \emph{TLEN}.\\
+As well the Physical coverage, also, this algorithm make a check on the \emph{FLAG} field
 \\
 \\
 
@@ -136,7 +139,7 @@ The resultant values were putted inside a wig file, called \emph{sequeence\_cove
 
 After that the file was loaded onto IGV to show the sequence coverage to help to make hypotesys and analisys about some structural variations.
 
-Some small part of resultant trak produced by the IGV are reported below:
+Some small part of resultant traks produced by the IGV are reported below:
 
 
  \begin{figure}[H]
@@ -169,12 +172,13 @@ The algorithm for the kmers analisys is inside the KmersAlgorithm.py.\\
 to work, the algorithm expects the kmers length value, many different test was made using 7-mers, 4-mers and 9-mers.\\
 The result was be really different and to make some hypotesys or analisys was be necessary plot different barchart by usign some R scripts.\\\\
 
-These traks has allowed to learn and see what are the most, and the less present kmers insiede the resequenced genome.\\
+These traks has allowed to learn and see what are the most, and the less present kmers inside the resequenced genome.\\
 
-The algorithm consider each kmers with the relative opposite, the goal is eliminate the errors that could comes from the "string slicing" from the kmers build.
+The algorithm consider each kmers with the relative opposite, the goal is eliminate the errors that could comes from the "string slicing" from the kmers build.\\\\
 
 The algorithm start from position 0 of each \emph{SEQ} and terminate with the end of \emph{SEQ}.
-In each loop made on the SEQ string, the algorithm move the start position from \verb|i| to \verb|i+1| and the end position from \verb|end| to \verb|end+1|, the resultant substring is long exactly how we aspect.
+In each loop made on the SEQ string, the algorithm move the start position from \verb|i| to \verb|i+1| and the end position from \verb|end| to \verb|end+1|.\\
+The resultant substring is exactly long how we aspect.\\\\
 
 I reported the traks generated by the different k dimensions below:
 
@@ -198,5 +202,7 @@ I reported the traks generated by the different k dimensions below:
 				\includegraphics[scale=0.45]{immagini/kmers_9.png}
 				\caption{Kmers with k = 9}\label{fig:14}
 				\end{figure}	
+				
+In these traks is simple to see what kmers are more frequent then others, the observation of the kmers and the relative bases should be helpfull for the gene recongition, because should allows the reasearch of a certain protein.				
 
 \section{Cigar H and S reads}

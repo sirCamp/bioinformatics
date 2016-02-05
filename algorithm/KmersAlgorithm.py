@@ -57,7 +57,6 @@ class KmersAlgorithm(BaseAlgorithm):
                     else:
                         kmers.__setitem__(key,1)
 
-        file = "";
         file = "kmer,quantity\n"
         for i in kmers:
             file += str(i)+","+str(kmers[i])+"\n"

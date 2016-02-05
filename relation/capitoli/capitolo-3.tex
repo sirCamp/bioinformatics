@@ -8,8 +8,297 @@
 \label{cap:source code}
 %**************************************************************
 
-\intro{Breve introduzione al capitolo}\\
+\intro{In this chapter is reported the source code of the algorithms developed by me and used inside the projects}\\
 
 %**************************************************************
-\section{Introduzione al progetto}
+\section{Phyton source code}
 
+In this section is reported all the pyhton source codes use in the project
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\subsection{Insertion length}
+\tiny
+\begin{minted}{python}
+
+class FirstAlgorithm(BaseAlgorithm):
+
+    def __init__(self, name, path):
+        BaseAlgorithm.__init__(self, name, path)
+
+    def run(self):
+        self.lengthOfCoverage()
+        genome_insertion = []
+        sum = 0;
+        sumI = 0;
+
+        ext = 0;
+        with open(self.path) as file:
+            for line in file:
+
+                if ext == self.length:break;
+
+                if line.find("@") != -1:
+                    continue
+
+                pieces = line.split("\t")
+                ext += 1
+                if int(pieces[8]) > 0 and int(pieces[8]) < 10000:
+                    isize = abs(int(pieces[3])-int(pieces[7]))
+                    genome_insertion.append(isize)
+                    sum += isize
+                    sumI += 1
+
+
+        file = "position,isize\n"
+        scatFile = "position,distance\n"
+
+        isizeM = int((sum / sumI))
+        tmp = 0
+        index = 1
+        for i in genome_insertion:
+            file += str(index)+","+str(i)+"\n"
+            dist = (i-isizeM)
+            scatFile += str(dist)+","+str(i)+"\n"
+            tmp += math.pow(dist,2) #per la dev standard
+            index += 1
+
+
+        print "Saving genome_insert_csv.csv file..."
+        targetF = open("genome_insert_csv.csv","w")
+        targetF.truncate()
+        targetF.write(file)
+        targetF.close()
+        print "Saving genome_insert_scat_csv.csv file..."
+        targetF = open("genome_insert_scat_csv.csv","w")
+        targetF.truncate()
+        targetF.write(scatFile)
+        targetF.close()
+        print "Media: "+str(isizeM)
+        print "Standard Dev: "+str(math.sqrt(tmp/(index)))
+        print("Done!")
+
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\subsection{Physical Coverage}
+\tiny
+\begin{minted}{python}
+class PhysicalCoverageAlgorithm(BaseAlgorithm):
+
+    leght = 0;
+
+    def __init__(self, name, path):
+        BaseAlgorithm.__init__(self, name, path)
+
+    def run(self):
+
+        self.lengthOfCoverage()
+        genome_change = [0] * self.length
+
+        for i in range:
+            genome_change.append(0)
+
+        with open(self.path) as file:
+            for line in file:
+                if line.find("@") != -1:
+                    continue;
+
+                pieces = line.split("\t")
+
+                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0):
+                    genome_change[int(pieces[3])] = genome_change[int(pieces[3])] + 1
+
+                    genome_change[int(pieces[7]) + len(str(pieces[9]))] = (genome_change[int(pieces[7]) + len(str(pieces[9]))]) - 1
+
+        file = "";
+        file += "fixedStep chrom=genome start=1 step=1 span=1\n"
+        currentC = 0
+
+
+
+        for i in range:
+            currentC += genome_change[i];
+            file += str(currentC)+"\n"
+
+        print "Saving to physical_coverage.wig "
+        targetF = open("physical_coverage.wig","w")
+        targetF.truncate()
+        targetF.write(file)
+        targetF.close()
+        print("Done!")
+\end{minted}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Sequence Coverage}
+\tiny
+\begin{minted}{python}
+
+class SequenceCoverageAlgorithm(BaseAlgorithm):
+
+
+
+    def __init__(self, name, path):
+        BaseAlgorithm.__init__(self, name, path)
+
+    def run(self):
+
+        self.lengthOfCoverage()
+        genome_change = [0] * self.length
+
+        #open the SAM file
+        print "Analising SAM file..."
+        with open(self.path) as file:
+            for line in file:
+
+                #exclude header lines
+                if line.find("@") != -1:
+                    continue;
+
+                pieces = line.split("\t")
+
+                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0):
+                   index = 0
+
+                   for x in xrange(0,len(str(pieces[9]))):
+                       genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
+                       index +=1
+                else:
+                    index = 0
+                    if int(pieces[8]) < 0:
+                      for x in xrange(0,len(str(pieces[9]))):
+                        genome_change[int(pieces[3])-index] = genome_change[int(pieces[3])-index] + 1
+                        index +=1
+
+
+
+        file = "";
+        file += "fixedStep chrom=genome start=1 step=1 span=1\n"
+
+        coverage = 0
+
+        for i in genome_change:
+            coverage = genome_change[i];
+            file += str(coverage)+"\n"
+
+        print "Saving sequence_coverage.wig file..."
+        targetF = open("sequence_coverage.wig","w")
+        targetF.truncate()
+        targetF.write(file)
+        targetF.close()
+        print("Done!")
+\end{minted}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kmers Counting}
+\tiny
+\begin{minted}{python}
+
+class KmersAlgorithm(BaseAlgorithm):
+	
+	def __init__(self, name, path):
+    		BaseAlgorithm.__init__(self, name, path)
+
+    def mapping(self, string):
+
+        string = string.replace("A", "W")
+        string = string.replace("T", "A")
+        string = string.replace("W", "T")
+
+        string = string.replace("C", "W")
+        string = string.replace("G", "C")
+        string = string.replace("W", "G")
+        return string
+
+    def run(self):
+
+        self.lengthOfCoverage()
+
+        #open the SAM file
+        print "Open SAM file..."
+        kmers = {}
+        index = 0
+        print "Looking for kmers and it's opposites for "+str(self.length)
+        with open(self.path) as file:
+            for line in file:
+
+                if index == self.length:
+                    break;
+
+                index += 1
+                #exclude header lines
+                if line.find("@") != -1:
+                    continue;
+
+                pieces = line.split("\t")
+
+                read = str(pieces[9])
+                padding = 0
+                while len(read[padding:padding+4]) >= 4:
+                    key = read[padding:padding+4]
+                    padding += 1
+                    if kmers.has_key(key):
+                        kmers[key] = kmers[key] +1
+
+                    elif kmers.has_key(self.mapping(key)):
+                            kmers[self.mapping(key)] = kmers[self.mapping(key)] +1
+                    else:
+                        kmers.__setitem__(key,1)
+
+        file = "";
+        file = "kmer,quantity\n"
+        for i in kmers:
+            file += str(i)+","+str(kmers[i])+"\n"
+
+        print "Saving kmers.csv file..."
+        targetF = open("kmers.csv","w")
+        targetF.truncate()
+        targetF.write(file)
+        targetF.close()
+        print("Done!")
+\end{minted}
+
+\section{R source code}
+In this section is reported all the R source codes use in the project
+
+
+\subsection{Insertion length distribution}
+\tiny
+\begin{minted}{matlab}
+chart <- read.csv('../genome_insert_csv.csv', header=TRUE, sep=",")
+png('../genome_insert.png')
+barplot(
+	as.integer(chart$isize), 
+	xlim=c(0,20000),
+	ylim=c(0,28000) , 
+	width = 5,
+	main="Insertion length distribution", 
+	border = "dark blue", 
+	xlab="Isertion length", 
+	ylab="Isertions", 
+	names.arg = chart$position, 
+	horiz = TRUE, 
+	col="grey"
+)
+\end{minted}
+
+
+\subsection{Kmers distribution}
+\tiny
+\begin{minted}{matlab}
+chart <- read.csv('../kmers.csv', header=TRUE, sep=",")
+png('../kmers.png',width = 2000,  height = 600)
+barplot(
+	as.integer(chart$quantity), 
+	xlim=c(0,900), ylim=c(0,15000) , 
+	width = 5, 
+	main="Kmers distribution", 
+	border = "dark blue", 
+	xlab="Kmers", 
+	ylab="Quantity", 
+	names.arg = chart$kmer, 
+	horiz = FALSE, 
+	col="grey", 
+	las=2
+)
+\end{minted}

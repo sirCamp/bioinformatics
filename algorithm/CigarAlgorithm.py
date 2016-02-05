@@ -29,27 +29,21 @@ class CigarAlgorithm(BaseAlgorithm):
 
 
                 if pieces[5].find("H") == -1 and pieces[5].find("S") == -1:
-                    index = 0
-                    for x in xrange(0,abs(int(pieces[8]))):
 
-                        key = int(pieces[3])+index
-                            #genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
-                            #index +=1
-                        if genome_change.has_key(key):
-                            genome_change[key] = genome_change[key] +0
-                        else:
-                            genome_change.__setitem__(key,0)
+                    continue
                 else:
-                    index = 0
-                    for x in xrange(0,abs(int(pieces[8]))):
+                    index = int(pieces[3])
 
-                        key = int(pieces[3])+index
-                            #genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
-                            #index +=1
+                    while index < (int(pieces[3])+int(pieces[8])):
+
+                        key = index
+                        #genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
+                        #index +=1
                         if genome_change.has_key(key):
                             genome_change[key] = genome_change[key] +1
                         else:
                             genome_change.__setitem__(key,1)
+                        index += 1
 
 
 

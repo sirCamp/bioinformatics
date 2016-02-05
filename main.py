@@ -23,7 +23,6 @@ def main_menu():
     print "[3] Physical coverage"
     print "[4] Cigar H & S"
     print "[5] Kmers counter"
-    print "[6] Insertion Average"
     print "\n"
     print "[0]. Quit"
     choice = raw_input(">>  ")
@@ -70,7 +69,6 @@ menu_actions = {
     '3': "PhysicalCoverageAlgorithm",
     '4': "CigarAlgorithm",
     '5': "KmersAlgorithm",
-    '6': "InsertionAverageAlgorithm",
     '0': exit,
 }
 
@@ -87,8 +85,9 @@ else:
 
         algorithm = main_menu()
         obj = eval(algorithm)(algorithm,sys.argv[1])
+        print "Algorithm "+algorithm+" started\n"
         obj.run()
-        print "Algorithm "+algorithm+" started"
+
     else:
         print("file not exists")
 

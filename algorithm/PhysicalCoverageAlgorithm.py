@@ -10,40 +10,11 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
 
     def __init__(self, name, path):
         BaseAlgorithm.__init__(self, name, path)
-        self.lenght = 0
-
-
-    def lengthOfCoverage(self):
-        os.system('clear')
-
-        print "Please insert the desidered length of physical coverage ( leave empty for wole genome ) :"
-        print "\n"
-        inputVal = raw_input(">>  ")
-        try:
-           self.lenght = int(inputVal)
-        except ValueError:
-           print("Error, you must pass a number")
-           self.lengthOfCoverage()
-
 
     def run(self):
 
         self.lengthOfCoverage()
-        if self.lenght  == 0:
-            print "physical coverage of whole genome"
-        else:
-            print "physical coverage of "+str(self.lenght)+" of genome"
-
-
-        line = ""
-        lineNumber = 0;
-        genome_change = []
-        range = []
-        if self.lenght == 0:
-            #TODO fare il parse
-            range  = xrange(0, 3079196)
-        else:
-            range = xrange(0, self.lenght)
+        genome_change = [0] * self.length
 
         for i in range:
             genome_change.append(0)
@@ -70,9 +41,9 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
             currentC += genome_change[i];
             file += str(currentC)+"\n"
 
-        print "Saving to "
+        print "Saving to physical_coverage.wig "
         targetF = open("physical_coverage.wig","w")
         targetF.truncate()
         targetF.write(file)
         targetF.close()
-        print("file is written")
+        print("Done!")
