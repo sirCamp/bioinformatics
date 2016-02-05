@@ -25,7 +25,7 @@ class InsertionAverageAlgorithm(BaseAlgorithm):
 
                 pieces = line.split("\t")
                 ext += 1
-                if ((eval(pieces[1]) & 3) == 3) and (int(pieces[8]) > 0) and int(pieces[8]) <10000:
+                if ((eval(pieces[1]) & 3) == 3) and int(pieces[8]) <10000:
 
                     index = 0;
                     while index < len(pieces[9]):
@@ -44,8 +44,8 @@ class InsertionAverageAlgorithm(BaseAlgorithm):
         for i in genome_insertion:
             file += str(genome_insertion[i])+"\n"
 
-        print "Saving genome_insertion_lenght.wig file..."
-        targetF = open("genome_insertion_lenght.wig","w")
+        print "Saving genome_insertion_lenght_average.wig file..."
+        targetF = open("genome_insertion_lenght_average.wig","w")
         targetF.truncate()
         targetF.write(file)
         targetF.close()

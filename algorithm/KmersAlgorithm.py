@@ -25,7 +25,6 @@ class KmersAlgorithm(BaseAlgorithm):
     def run(self):
 
         self.lengthOfCoverage()
-        #genome_change = [0] * self.length
 
         #open the SAM file
         print "Open SAM file..."
@@ -59,7 +58,7 @@ class KmersAlgorithm(BaseAlgorithm):
                         kmers.__setitem__(key,1)
 
         file = "";
-
+        file = "kmer,quantity\n"
         for i in kmers:
             file += str(i)+","+str(kmers[i])+"\n"
 

@@ -50,7 +50,7 @@
 \usepackage{graphicx}                   % immagini
 
 \usepackage{hyperref}                   % collegamenti ipertestuali
-
+\usepackage{float}
 
 
 \usepackage[binding=5mm]{layaureo}      % margini ottimizzati per l'A4; rilegatura di 5 mm
@@ -75,6 +75,7 @@
 \usepackage{tabularx}                   % tabelle di larghezza prefissata                                    
 \usepackage{longtable}                  % tabelle su più pagine                                        
 \usepackage{ltxtable}                   % tabelle su più pagine e adattabili in larghezza
+\usepackage{verbatim}
 
 \usepackage[toc, acronym]{glossaries}   % glossario
                                         % per includerlo nel documento bisogna:
@@ -84,7 +85,7 @@
                                         % 4. compilare due volte tesi.tex.
 
 \usepackage[backend=biber,style=verbose-ibid,hyperref,backref]{biblatex}
-                                        % eccellente pacchetto per la bibliografia; 
+\usepackage{scrextend}                                        % eccellente pacchetto per la bibliografia; 
                                         % produce uno stile di citazione autore-anno; 
                                         % lo stile "numeric-comp" produce riferimenti numerici
                                         % per includerlo nel documento bisogna:
@@ -107,6 +108,8 @@
 % Materiale principale
 %**************************************************************
 \mainmatter
+
+\changefontsizes[16pt]{14pt}
 \input{capitoli/capitolo-1}             % Introduzione
 \input{capitoli/capitolo-2}             % Processi
 \input{capitoli/capitolo-3}             % Kick-Off
