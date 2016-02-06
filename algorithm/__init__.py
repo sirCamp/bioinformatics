@@ -1,4 +1,4 @@
-from algorithm.FirstAlgorithm import FirstAlgorithm
+from algorithm.InsertionLengthAlgorithm import InsertionLengthAlgorithm
 from algorithm.PhysicalCoverageAlgorithm import PhysicalCoverageAlgorithm
 from algorithm.SequenceCoverageAlgorithm import SequenceCoverageAlgorithm
 from algorithm.CigarAlgorithm import CigarAlgorithm

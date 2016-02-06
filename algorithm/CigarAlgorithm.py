@@ -1,8 +1,4 @@
 from base.BaseAlgorithm import BaseAlgorithm
-import sys
-import string
-import os
-import errno
 
 class CigarAlgorithm(BaseAlgorithm):
 
@@ -27,37 +23,31 @@ class CigarAlgorithm(BaseAlgorithm):
 
                 pieces = line.split("\t")
 
-
+                #exclude all reads that no have H or S inside CIGAR field
                 if pieces[5].find("H") == -1 and pieces[5].find("S") == -1:
 
                     continue
                 else:
                     index = int(pieces[3])
+                    length = (int(pieces[3]) + int(pieces[8]))
+                    while(index < length ):
 
-                    while index < (int(pieces[3])+int(pieces[8])):
-
-                        key = index
-                        #genome_change[int(pieces[3])+index] = genome_change[int(pieces[3])+index] + 1
-                        #index +=1
-                        if genome_change.has_key(key):
-                            genome_change[key] = genome_change[key] +1
+                        if genome_change.has_key(index):
+                            genome_change[index] = genome_change[index] + 1
                         else:
-                            genome_change.__setitem__(key,1)
+                            genome_change.__setitem__(index,1)
+
                         index += 1
 
-
-
-        file = "";
         file += "fixedStep chrom=genome start=1 step=1 span=1\n"
 
         coverage = 0
 
         for i in genome_change:
             coverage = genome_change[i];
-            print i
-            file += str(i)+"\n"
+            file += str(coverage)+"\n"
 
-        print "Saving sequence_coverage.wig file..."
+        print "Saving cigar.wig file..."
         targetF = open("cigar.wig","w")
         targetF.truncate()
         targetF.write(file)

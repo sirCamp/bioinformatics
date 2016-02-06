@@ -1,8 +1,4 @@
 from base.BaseAlgorithm import BaseAlgorithm
-import sys
-import string
-import os
-import errno
 
 class PhysicalCoverageAlgorithm(BaseAlgorithm):
 
@@ -31,11 +27,8 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
 
                     genome_change[int(pieces[7]) + len(str(pieces[9]))] = (genome_change[int(pieces[7]) + len(str(pieces[9]))]) - 1
 
-        file = "";
         file += "fixedStep chrom=genome start=1 step=1 span=1\n"
         currentC = 0
-
-
 
         for i in range:
             currentC += genome_change[i];

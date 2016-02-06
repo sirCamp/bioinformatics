@@ -19,8 +19,8 @@ def main_menu():
     print "Welcome,\n"
     print "Please choose the menu you want to start:"
     print "[1] Genome insert length with STD and mean"
-    print "[2] Sequence coverage"
-    print "[3] Physical coverage"
+    print "[2] Physical coverage"
+    print "[3] Sequence coverage"
     print "[4] Cigar H & S"
     print "[5] Kmers counter"
     print "\n"
@@ -49,10 +49,6 @@ def run(choice):
     return
 
 
-# Back to main menu
-#def back():
-#    menu_actions['main_menu']()
-
 # Exit program
 def exit():
     sys.exit()
@@ -64,9 +60,9 @@ def exit():
 # Menu definition
 menu_actions = {
     'main_menu': main_menu,
-    '1': "FirstAlgorithm",
-    '2': "SequenceCoverageAlgorithm",
+    '1': "InsertionLengthAlgorithm",
     '3': "PhysicalCoverageAlgorithm",
+    '2': "SequenceCoverageAlgorithm",
     '4': "CigarAlgorithm",
     '5': "KmersAlgorithm",
     '0': exit,
@@ -85,7 +81,7 @@ else:
 
         algorithm = main_menu()
         obj = eval(algorithm)(algorithm,sys.argv[1])
-        print "Algorithm "+algorithm+" started\n"
+        print "Algorithm "+algorithm+" started"
         obj.run()
 
     else:
