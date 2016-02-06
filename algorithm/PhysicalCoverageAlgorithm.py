@@ -10,10 +10,9 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
     def run(self):
 
         self.lengthOfCoverage()
-        genome_change = [0] * self.length
 
-        for i in range:
-            genome_change.append(0)
+        genome_change = [0] * self.length
+        range = xrange(0, self.length)
 
         with open(self.path) as file:
             for line in file:
@@ -27,8 +26,10 @@ class PhysicalCoverageAlgorithm(BaseAlgorithm):
 
                     genome_change[int(pieces[7]) + len(str(pieces[9]))] = (genome_change[int(pieces[7]) + len(str(pieces[9]))]) - 1
 
+        file = "";
         file += "fixedStep chrom=genome start=1 step=1 span=1\n"
         currentC = 0
+
 
         for i in range:
             currentC += genome_change[i];

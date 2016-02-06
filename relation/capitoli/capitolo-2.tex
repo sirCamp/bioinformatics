@@ -26,7 +26,7 @@ This command serves to index the fasta genome file. The indexing of the genome's
 The second typed command is:
 \\
 \\
-\verb|bwa mem Lactobacillus_casei_genome.fasta lact_sp.read1.fastq lact_sp.read2.fastq > Lactobacillus_casei_genome.sam|
+\verb|bwa -t 4 mem Lactobacillus_casei_genome.fasta lact_sp.read1.fastq lact_sp.read2.fastq > Lactobacillus_casei_genome.sam|
 \\
 \\
 This command allows the alignment of the two reads files on the reference genome file into a SAM file that servers for the project.\\

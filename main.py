@@ -61,8 +61,8 @@ def exit():
 menu_actions = {
     'main_menu': main_menu,
     '1': "InsertionLengthAlgorithm",
-    '3': "PhysicalCoverageAlgorithm",
-    '2': "SequenceCoverageAlgorithm",
+    '2': "PhysicalCoverageAlgorithm",
+    '3': "SequenceCoverageAlgorithm",
     '4': "CigarAlgorithm",
     '5': "KmersAlgorithm",
     '0': exit,
