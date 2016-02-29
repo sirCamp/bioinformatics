@@ -16,3 +16,10 @@ For the *Sequence Coverage* and *Physical Coverage* the output will be an **.wig
 This file can be explored with a Genome Browser as IGV that you can find here:
 > [https://www.broadinstitute.org/software/igv/download](https://www.broadinstitute.org/software/igv/download)
 
+# Usage
+
+In order to use this tools you need to start the *main.py*:
+```python
+python main.py "/your/sam/file/path.sam"
+```
+
